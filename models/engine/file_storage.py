@@ -6,6 +6,13 @@
 import json
 import os.path
 from models.base_model import BaseModel
+from models.user import User
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class FileStorage:
@@ -34,7 +41,7 @@ class FileStorage:
         """
         serializes __objects to the JSON file (path: __file_path)
         """
-        my_dict ={}
+        my_dict = {}
         for key, value in self.__objects.items():
             dict_value = value.to_dict()
             my_dict.update({key: dict_value})
@@ -45,6 +52,13 @@ class FileStorage:
         """
         deserializes the JSON file to __objects
         """
-        if os.path.exists('{}'.format(self.__file_path)) is True:
-            with open(filename, encoding='utf-8') as file:
-                my_dict = json.loads(file.read())
+        try:
+            if os.path.exists('{}'.format(self.__file_path)) is True:
+                with open(self.__file_path, 'r') as file:
+                    my_dict_elements = json.load(file)
+                    for key, value in my_dict_elements.items():
+                        clas = value["__class__"]
+                        clas = eval(clas)
+                        self.new(clas(**value))
+        except BaseException:
+            pass
