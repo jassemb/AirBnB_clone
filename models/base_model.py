@@ -1,6 +1,7 @@
+
 #!urs/bin/python3
 """
-This module creates the Base class
+base model
 """
 import models
 import uuid
@@ -8,11 +9,8 @@ from datetime import datetime
 
 
 class BaseModel:
-    """A class named BaseModel
-    Attributes:
-    attr1(id): object id
-    attr2(created_at): datetime instance is created
-    attr3(updated_at): datetime instance is created and updated when changed
+    """
+    Base model that defines all common attributes/methods for other classes
     """
     def __init__(self, *args, **kwagrs):
         """
