@@ -1,67 +1,111 @@
 #!/usr/bin/python3
+"""
+test module for testing file storage
+"""
 
-import unittest
-import json
+import datetime
 import os
+import unittest
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
+from models import storage
+from models.user import User
 
 
 class TestFileStorage(unittest.TestCase):
-    '''
-    Test cases for file_storage class
-    '''
+    """test class for testing file storage
+    """
+    temp_file = ""
+
+    @staticmethod
+    def move_file(source, dest):
+        with open(source, 'r', encoding='utf-8') as myFile:
+            with open(dest, 'w', encoding='utf-8') as tempFile:
+                tempFile.write(myFile.read())
+        os.remove(source)
 
     def setUp(self):
-        '''
-        simple set up
-        '''
-        self.my_model = BaseModel()
-        self.storage = FileStorage()
+        self.temp_file = storage.parent_directory + '/temp_store.json'
+        self.move_file(storage.get_filepath(), self.temp_file)
+        self.temp_objs = [BaseModel(), BaseModel(), BaseModel()]
+        for obj in self.temp_objs:
+            storage.new(obj)
+        storage.save()
 
     def tearDown(self):
-        '''
-        tear down method
-        '''
-        if os.path.exists("file.json"):
-            os.remove("file.json")
-        else:
-            pass
+        self.move_file(self.temp_file, storage.get_filepath())
+        del self.temp_objs
 
-    def test_new(self):
-        '''
-        tests new method in file storage
-        '''
-        self.storage.new(self.my_model)
-        new_dict = self.storage.all()
-        key = self.my_model.__class__.__name__ + '.' + self.my_model.id
-        self.assertIsInstance(new_dict[key], BaseModel)
-
-    def test_all(self):
-        '''
-        tests if all returns a dict
-        '''
-        self.assertIsInstance(self.storage.all(), dict)
+    def test_type(self):
+        """type checks for FileStorage
+        """
+        self.assertIsInstance(storage, FileStorage)
+        self.assertEqual(type(storage), FileStorage)
 
     def test_save(self):
-        '''
-        tests the save method of file storage class
-        '''
-        self.storage.save()
-        self.assertTrue(os.path.exists("file.json"))
+        """tests save functionality for FileStorage
+        """
+        with open(storage.get_filepath(), 'r', encoding='utf-8') as myFile:
+            dump = myFile.read()
+        self.assertNotEqual(len(dump), 0)
+        temp_d = eval(dump)
+        key = self.temp_objs[0].__class__.__name__ + '.'
+        key += str(self.temp_objs[0].id)
+        self.assertNotEqual(len(temp_d[key]), 0)
+        key2 = 'State.412409120491902491209491024'
+        try:
+            self.assertRaises(temp_d[key2], KeyError)
+        except BaseException:
+            pass
 
-    def test_json_file_content_type(self):
-        '''
-        tests if the content of the json file is type dict
-        '''
-        self.storage.save()
-        self.storage.new(self.my_model)
+    def test_reload(self):
+        """tests reload functionality for FileStorage
+        """
+        storage.reload()
+        obj_d = storage.all()
+        key = self.temp_objs[1].__class__.__name__ + '.'
+        key += str(self.temp_objs[1].id)
+        self.assertNotEqual(obj_d[key], None)
+        self.assertEqual(obj_d[key].id, self.temp_objs[1].id)
+        key2 = 'State.412409120491902491209491024'
+        try:
+            self.assertRaises(obj_d[key2], KeyError)
+        except BaseException:
+            pass
 
-        with open("file.json", encoding='utf-8') as fd:
-            data = json.load(fd)
+    def test_delete_basic(self):
+        """tests delete basic functionality for FileStorage
+        """
+        self.assertEqual(storage.delete(BaseModel()), True)
+        self.assertEqual(storage.delete(self.temp_objs[2]), True)
+        obj_d = storage.all()
+        key2 = self.temp_objs[2].__class__.__name__ + '.'
+        key2 += str(self.temp_objs[2].id)
+        try:
+            self.assertRaises(obj_d[key2], KeyError)
+        except BaseException:
+            pass
 
-        self.assertIsInstance(data, dict)
+    def test_delete_badinput(self):
+        """tests delete bad input functionality for FileStorage
+        """
+        self.assertEqual(storage.delete(None), False)
+        self.assertEqual(storage.delete('mymodel'), False)
 
+    def test_new_basic(self):
+        """tests new basic functionality for FileStorage
+        """
+        obj = BaseModel()
+        storage.new(obj)
+        obj_d = storage.all()
+        key = obj.__class__.__name__ + '.' + str(obj.id)
+        self.assertEqual(obj_d[key] is obj, True)
 
-if __name__ == "__main__":
-    unittest.main()
+    def test_new_badinput(self):
+        """tests new bad input functionality for FileStorage
+        """
+        try:
+            self.assertRaises(storage.new('jwljfef'), TypeError)
+            self.assertRaises(storage.new(None), TypeError)
+        except BaseException:
+            pass
