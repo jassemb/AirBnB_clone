@@ -9,16 +9,12 @@ from datetime import datetime
 
 class BaseModel:
     """
-    Base model that defines all common
-    attributes/methods for other classes
+    Base model that defines all common attributes/methods for other classes
     """
 
     def __init__(self, *args, **kwagrs):
         """
-        Initialize a new BaseModel.
-        Args:
-            *args (any): Unused.
-            **kwargs (dict): Key/value pairs of attributes.
+        init methode
         """
         time_format = "%Y-%m-%dT%H:%M:%S.%f"
         if len(kwagrs) == 0:
@@ -29,15 +25,15 @@ class BaseModel:
             models.storage.save()
 
         elif len(kwagrs) > 0:
-            for key, value in kwagrs.items():
-                if key == "created_at" or key == "updated_at":
-                    value = datetime.strptime(value, time_format)
-                if key != "__class__":
-                    setattr(self, key, value)
+            for k, v in kwagrs.items():
+                if k == "created_at" or k == "updated_at":
+                    v = datetime.strptime(v, time_format)
+                if k != "__class__":
+                    setattr(self, k, v)
 
     def __str__(self):
         """
-        Returns the informal representation
+        str methode
         """
         return ("[{}]) ({}) {}".format(self.__class__.__name__, self.id,
                                        self.__dict__))
@@ -52,8 +48,7 @@ class BaseModel:
 
     def to_dict(self):
         """
-        returns a dictionary containing all
-        keys/values of __dict__ of the instance
+        returns a dictionary containing all keys/values of __dict__
         """
         d = dict(**self.__dict__)
         d['__class__'] = str(type(self).__name__)
