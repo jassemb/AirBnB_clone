@@ -9,6 +9,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.place import Place
+from models.review import Review
 
 
 class FileStorage:
@@ -38,9 +39,8 @@ class FileStorage:
         """
         new_dict = {}
         for k, v in self.__objects.items():
-            new_value = v.to_dict()
-            new_dict.update({k: new_value})
-        with open(self.__file_path, 'w') as f:
+            new_dict[k] = v.to_dict()
+        with open(self.__file_path, "w", encoding="UTF-8") as f:
             json.dump(new_dict, f)
 
     def reload(self):
