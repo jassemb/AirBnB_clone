@@ -45,3 +45,4 @@ class BaseModel:
         newdict['updated_at'] = datetime.isoformat(newdict['updated_at'])
         newdict['__class__'] = self.__class__.__name__
         return newdict
+
