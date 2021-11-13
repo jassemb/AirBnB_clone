@@ -12,6 +12,11 @@ class BaseModel:
     attributes/methods for other classes
     """
     def __init__(self, *args, **kwargs):
+        """Initialize a new BaseModel.
+        Args:
+            *args (any): Unused.
+            **kwargs (dict): Key/value pairs of attributes.
+        """
         if(len(kwargs) == 0):
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
