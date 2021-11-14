@@ -50,3 +50,12 @@ FILE | DESCRIPTION | ATTRIBUTES
 [state.py](./models/state.py) | State class | name
 [place.py](./models/place.py) | Place class | amenity_id, city_id, user_id, name, description, number_rooms, number_bathrooms, max_guest, price_by_night, latitude, longitude
 [review.py](./models/review.py) | Review class | place_id, user_id, text
+## Built With
+* [Python 3.4.3](https://www.python.org/download/releases/3.0/) - Python3 Language
+* [PEP8 1.7](https://www.python.org/dev/peps/pep-0008/) - PEP8 style guide
+* [Ubuntu 14.04 LTS](http://releases.ubuntu.com/14.04/) - OS used
+
+
+### Authors
+Ben ali jassem - [github.com/jassemb](https://github.com/jassemb) <br>
+Mouadh Amemri - [https://github.com/mouadhx04](https://github.com/mouadhx04)
