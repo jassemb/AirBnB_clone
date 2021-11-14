@@ -9,12 +9,12 @@ from datetime import datetime
 
 class BaseModel:
     """
-    Base model that defines all common attributes/methods for other classes
+    Base model that defines all common attributes/methods for all the classes
     """
 
     def __init__(self, *args, **kwargs):
         """
-        init methode
+        __init__ methode
         """
         time_format = "%Y-%m-%dT%H:%M:%S.%f"
         self.id = str(uuid.uuid4())
@@ -32,7 +32,7 @@ class BaseModel:
 
     def __str__(self):
         """
-        should print: [<class name>] (<self.id>) <self.__dict__>
+        should print : [<class name>] (<self.id>) <self.__dict__>
         """
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id,
                                      self.__dict__)
