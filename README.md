@@ -23,6 +23,9 @@ create the first abstracted storage engine of the project: File storage.
 create all unittests to validate all our classes and storage engine
 
 ## COMMAND | DESCRIPTION
+To begin interactive mode, run ```./console.py``` from the command line
+
+COMMAND | DESCRIPTION
 ----|----
 ```(hbnb) quit``` | Quits console
 ```(hbnb) EOF``` | Quits console via EOF
@@ -32,6 +35,7 @@ create all unittests to validate all our classes and storage engine
 ```(hbnb) destroy <class> <id>``` | Destroy object
 ```(hbnb) all <class>``` | Show all instances of a class
 ```(hbnb) update <class> <id> <attribute name> <attribute value>``` | Creates or updates the attribute of a class
+
 
 ## Files Used in this Project
 Models for all classes are located in the [models](./models/) directory.
