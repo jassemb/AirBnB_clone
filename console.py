@@ -59,7 +59,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         """
         creates a new instances of BaseModel
-        saves it and prints the id
+        saves it and print the id
         """
         args = args.split(" ")
         if args == "":
@@ -75,7 +75,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, args):
         """
-        Prints the string representation of an
+        Print the string representation of an
         instance based on the class name and id
         """
         args = args.split()
@@ -97,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, args):
         """
-        Deletes an instance based on the class name and id
+        Delete an instance based on the class name and id
         """
         if not args:
             print("** class name missing **")
@@ -123,7 +123,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """
-        Prints all string representation of all instances
+        Print all string representation of all instances
         based or not on the class name
         """
         args = args.split()
@@ -144,7 +144,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, args):
         """
-        Updates an instance based on the class
+        Update an instance based on the class
         name and id by adding or updating attribute
         """
         args = args.split()
