@@ -21,7 +21,7 @@ class FileStorage:
 
     def all(self):
         """
-        returns the dictionary __objects
+        returns the dictionary __objects of the file
         """
         return self.__objects
 
@@ -45,7 +45,7 @@ class FileStorage:
 
     def reload(self):
         """
-        deserializes the JSON file to __objects
+        deserializes the JSON file to __objects from the file
         """
         try:
             with open(self.__file_path, "r", encoding="UTF-8") as f:
