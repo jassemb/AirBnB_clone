@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+Defines city test
+
+"""
 
 import unittest
 import models
