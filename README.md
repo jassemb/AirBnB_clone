@@ -9,7 +9,7 @@ This is the first step towards building your first full web application:
 This project was created to **Holberton School.**
 
 ## Usage
-Like the Unix shell, the HBnB console works in both interactive and non-interactive modes. In interactive mode, it prints a prompt and waits for input from the user
+Like the Unix shell, the HBnB console works in both interactive and non-interactive modes. In interactive mode, it prints a prompt and waits for input from the user.
 
 
 ## First step:
@@ -20,7 +20,7 @@ we put in place a parent class (called BaseModel) to take care of the initializa
 create a simple flow of serialization/deserialization: Instance <-> Dictionary <-> JSON string <-> file
 create all classes used for AirBnB (User, State, City, Place…) that inherit from BaseModel
 create the first abstracted storage engine of the project: File storage.
-create all unittests to validate all our classes and storage engine
+create all unittests to validate all our classes and storage engine.
 
 ## COMMAND | DESCRIPTION
 To begin interactive mode, run ```./console.py``` from the command line
