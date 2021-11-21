@@ -48,3 +48,43 @@ button {
 .locations h4, .amenities h4 {
 	font-weight: 400;
 }
+
+.locations h3, .locations h4, .amenities h3, .amenities h4 {
+	margin: 0;
+	margin-top: 10px;
+	margin-left: 40px;
+}
+
+.popover h2 {
+	font-size: 16px;
+	margin: 0;
+	margin-top: 10px;
+}
+
+.popover li {
+	margin-top: 5px;
+}
+
+.locations .popover, .amenities .popover {
+	margin: 0;
+	display: none;
+	position: absolute;
+	background-color: #FAFAFA;
+	width: 21%;
+	top: 100%;
+	border: 1px solid #DDDDDD;
+	border-radius: 4px;
+	line-height: 20px;
+}
+
+.locations .popover {
+	left: -1px;
+}
+
+.amenities .popover {
+	left: 25%;
+}
+
+.locations:hover .popover, .amenities:hover .popover {
+	display: block;
+}
